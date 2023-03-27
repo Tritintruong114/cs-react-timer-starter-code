@@ -1,24 +1,39 @@
 import { useState, useRef } from "react";
 
 const useTimer = (ini = 0) => {
-  const [time, setTime] = "Your code here";
+  const [time, setTime] = useState(0);
 
-  const isStart = "Your code here";
-  const active = "Your code here";
-  const refInterval = "Your code here";
+  const isStart = useRef(true); // this is initalvalue is boolean 
+  const active = useRef(false); // this is initalvalue is undefined
+  const refInterval = useRef(0); // this is initalvalue is a number
+  const timerOn = useRef(false); // this is initalvalue is undefined
+
 
   const startTimer = () => {
-    "Your code here";
-    active.current.disabled = true;
+    // console.log(active.current)
+    timerOn.current = true;    //this is for render the Stop and Reset when timer on
+    console.log(timerOn, "checking timer")
+    active.current.disabled = true;  //this is for active the timer 
+    isStart.current = true;
+    refInterval.current = setInterval(() => {
+      if (isStart.current) {
+        setTime((time) => time + 1);
+      }
+    }, 1000);
   };
-  const stopTimer = () => {
-    "Your code here";
+  const stopTimer = () => { 
+    // active.current.disabled = false; 
+    timerOn.current = false;   //this is for render the Start button when we stop
+    isStart.current = false; 
+    clearInterval(refInterval.current);
   };
   const resetTimer = () => {
-    "Your code here";
-    active.current.disabled = false;
+    active.current = false;
+    setTime(0); 
+    clearInterval(refInterval.current);
+    timerOn.current = false;   //this is for reset timer
   };
 
-  return { time, startTimer, stopTimer, resetTimer, active };
+  return { time, startTimer, stopTimer, resetTimer, active , timerOn };
 };
 export default useTimer;
