@@ -33,7 +33,7 @@ const useTimer = (ini = 0) => {
     clearInterval(refInterval.current);
   };
   const resetTimer = () => {
-    active.current = false;
+    active.current.disabled = false;
     setTime(0);
     setSplitTime([]);
     clearInterval(refInterval.current);

@@ -4,5 +4,9 @@ export const formatTime = (time) => {
   const getMinutes = `0${minutes % 60}`.slice(-2);
   const getHours = `0${Math.floor(time / 3600)}`.slice(-2);
 
-  return `${getHours} : ${getMinutes} : ${getSeconds}`;
+  return (
+    <div className="text-xl md:text-3xl xl:text-6xl">
+      {getHours} : {getMinutes} : {getSeconds}
+    </div>
+  );
 };
